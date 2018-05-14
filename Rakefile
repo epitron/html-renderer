@@ -1,20 +1,20 @@
+pkgname = "html-renderer"
 gem_version = File.read("VERSION").strip
-gem_name    = "html-renderer"
+
+gemfile = "#{pkgname}-#{gem_version}.gem"
 
 task :build do
   system "gem build .gemspec"
+  system "mkdir pkg/" unless File.directory? "pkg"
+  system "mv #{gemfile} pkg/"
+end
+ 
+task :release => :build do
+  system "gem push pkg/#{gemfile}"
 end
 
-task :release => :build do
-  system "gem push #{gem_name}-#{gem_version}.gem"
-end
+task :gem => :build
 
 task :install => :build do
-  system "gem install --local #{gem_name}-#{gem_version}.gem"
+  system "gem install pkg/#{gemfile}"
 end
-
-task :pry do
-  system "pry --gem"
-end
-
-task :default => :spec
