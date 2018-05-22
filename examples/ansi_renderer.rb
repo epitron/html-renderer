@@ -39,10 +39,6 @@ public
     text
   end
 
-  def raw_html(html)
-    ''
-  end
-
   def underline(content)
     content.magenta.bold
   end
@@ -65,12 +61,20 @@ public
     end
   end
 
+  def anchor(name, title=nil, content=nil)
+    result = "Anchor: ##{name}"
+    result << " (#{title})" if title
+    result << "\n"
+    result << "#{content}\n" if content
+    result
+  end
+
   def image(link, title, content)
     link(link, nil, title)
   end
 
   def italic(text)
-    text.light_yellow
+    text.yellow.bold
   end
 
   def block_code(code, language)
@@ -147,6 +151,14 @@ public
     end
   end
 
+  def definition_list(defs)
+    defs.each do |dt, dd|
+      puts "<15>#{dt}<7>:".colorize
+      puts "  #{dd}"
+      puts
+    end
+  end
+
   def table(header, rows)
     if header
       table = Terminal::Table.new(headings: header, rows: rows)
@@ -164,5 +176,5 @@ end
 
 
 if __FILE__ == $0
-  puts ANSIRenderer.render(open("test.html"))
+  puts ANSIRenderer.render(open(ARGV.first || "test.html"))
 end

@@ -69,9 +69,14 @@ private
           when "a"
             url     = node["href"]
             title   = node["title"]
+            name    = node["name"]
             content = render_children(node, state)
 
-            link(url, title, content)
+            if name and not url
+              anchor(name, title, content)
+            else
+              link(url, title, content)
+            end
 
           when "img"
             link    = node["src"]
@@ -98,11 +103,12 @@ private
           when "hr"
             separator
 
-          when "p"
+          when "p", "dl"
             paragraph(render_children(node, state).strip)
-          when "div"
+          when "div", "option", "dd", "dt"
             div(render_children(node, state))
 
+          # TODO: Pass a complete array to list callbacks (similar to "table")
           when "ul"
             list(render_children(node, state), state.list_order)
           when "ol"
@@ -144,7 +150,8 @@ private
 
           when "html", "body", "nav", "span", "form", "label", "input", "button", "section", "fieldset",
                "menu", "article", "header", "time", "aside", "footer", "nobr", "wbr", 
-               "table", "tr", "td", "th", "thead", "tbody", "noscript"
+               "table", "tr", "td", "th", "thead", "tbody", "noscript", "select",
+               "address"
             render_children(node, state)
 
           when "head", "script", "link", "style"
