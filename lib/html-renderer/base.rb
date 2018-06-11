@@ -150,15 +150,17 @@ private
 
           when "html", "body", "nav", "span", "form", "label", "input", "button", "section", "fieldset",
                "menu", "article", "header", "time", "aside", "footer", "nobr", "wbr", 
-               "table", "tr", "td", "th", "thead", "tbody", "noscript", "select",
-               "address"
+               "table", "tr", "td", "th", "tt", "thead", "tbody", "noscript", "select",
+               "address", "center"
             render_children(node, state)
 
           when "head", "script", "link", "style"
             # skip it
 
           else
-            raise "Unrecognized HTML tag: #{node.name} -> #{node.inspect}"
+            # raise "Unrecognized HTML tag: #{node.name} -> #{node.inspect}"
+            $stderr.puts "Unrecognized HTML tag: #{node.name} -> #{node.inspect}"
+            render_children(node, state)
           end
 
         when Oga::XML::Comment

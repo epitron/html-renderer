@@ -12,9 +12,11 @@ Gem::Specification.new do |s|
   s.email       = "chris@ill-logic.com"
   s.authors     = ["epitron"]
 
-  s.files = `git ls`.lines.map(&:strip)
+  s.files            = `git ls`.lines.map(&:strip)
+  s.executables      = ['html2ansi']
   s.extra_rdoc_files = ["README.md", "LICENSE"]
   
   s.add_dependency "oga", "~> 2"
-  s.add_development_dependency "ansi", "~> 1"
+  s.add_dependency "terminal-table", "~> 1.8"
+  # s.add_development "ansi", "~> 1"
 end
