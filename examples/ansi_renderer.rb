@@ -102,7 +102,7 @@ public
       when 1 then title.bold.yellow
       when 2 then title.bold.cyan
       when 3 then title.bold.blue
-      else title.purple
+      else title.magenta
     end
 
     "#{bar}\n  #{title}\n#{bar}\n\n"
