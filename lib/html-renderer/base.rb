@@ -96,6 +96,8 @@ private
             emphasis(render_children(node, state))
           when "sup"
             superscript(render_children(node, state))
+          when "sub"
+            subscript(render_children(node, state))
           when "u"
             underline(render_children(node, state))
           when "br"
@@ -118,7 +120,7 @@ private
             list_item(render_children(node, state), state.list_order)
 
           when "code"
-            block_code(render_children(node, state))
+            block_code(render_children(node, state), nil)
           when "blockquote"
             block_quote(render_children(node, state))
 
@@ -149,9 +151,9 @@ private
             table(header, rows)
 
           when "html", "body", "nav", "span", "form", "label", "input", "button", "section", "fieldset",
-               "menu", "article", "header", "time", "aside", "footer", "nobr", "wbr", 
+               "menu", "article", "header", "time", "aside", "footer", "nobr", "wbr",
                "table", "tr", "td", "th", "tt", "thead", "tbody", "noscript", "select",
-               "address", "center"
+               "address", "center", "small"
             render_children(node, state)
 
           when "head", "script", "link", "style"
