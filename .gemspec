@@ -18,5 +18,6 @@ Gem::Specification.new do |s|
   
   s.add_dependency "oga", "~> 2"
   s.add_dependency "terminal-table", "~> 1.8"
+  s.add_dependency "term-ansicolor", "~> 1.7"
   # s.add_development "ansi", "~> 1"
 end
