@@ -151,7 +151,7 @@ private
             table(header, rows)
 
           when "html", "body", "nav", "span", "form", "label", "input", "button", "section", "fieldset",
-               "menu", "article", "header", "time", "aside", "footer", "nobr", "wbr",
+               "pre", "menu", "article", "header", "time", "aside", "footer", "nobr", "wbr",
                "table", "tr", "td", "th", "tt", "thead", "tbody", "noscript", "select",
                "address", "center", "small"
             render_children(node, state)
@@ -165,8 +165,7 @@ private
             render_children(node, state)
           end
 
-        when Oga::XML::Comment
-          # skip it
+        when Oga::XML::Comment, Oga::XML::Cdata
 
         else
           raise "Unhandled Oga node type: #{node.class}"
