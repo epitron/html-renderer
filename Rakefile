@@ -1,7 +1,6 @@
-pkgname = "html-renderer"
-gem_version = File.read("VERSION").strip
+gem = eval(File.read '.gemspec')
 
-gemfile = "#{pkgname}-#{gem_version}.gem"
+gemfile = "#{gem.name}-#{gem.version}.gem"
 
 task :build do
   system "gem build .gemspec"

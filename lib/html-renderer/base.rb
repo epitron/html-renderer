@@ -65,7 +65,7 @@ private
           content.blank? ? normal_text(content) : nil
 
         when Oga::XML::Element
-          case node.name
+          case node.name.downcase
           when "a"
             url     = node["href"]
             title   = node["title"]
