@@ -14,8 +14,8 @@ Gem::Specification.new do |s|
 
   s.files            = `git ls`.lines.map(&:strip)
   s.extra_rdoc_files = ["README.md", "LICENSE"]
-  
-  s.add_dependency "oga", "~> 2"
+
+  s.add_dependency "oga"
   s.add_dependency "terminal-table", "~> 1.8"
   s.add_dependency "term-ansicolor", "~> 1.7"
 end

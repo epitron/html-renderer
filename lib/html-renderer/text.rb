@@ -1,9 +1,10 @@
-# require 'html-renderer'
+require 'html-renderer'
 
 #
-# Everything-stripping renderer.
+# Strips out everything but the plain text.
 #
 class HTMLRenderer::Text < HTMLRenderer::Base
+
   # Methods where the first argument is the text content
   [
     # block-level calls
@@ -64,9 +65,4 @@ class HTMLRenderer::Text < HTMLRenderer::Base
   def table_cell(content, alignment)
     content + "\t"
   end
-end
-
-
-if __FILE__ == $0
-  puts HTMLRenderer::Text.render(open("test.html"))
 end

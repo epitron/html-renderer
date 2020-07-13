@@ -1,30 +1,25 @@
 ######################################################################################
 require 'oga'
 ######################################################################################
-#
-# TODOs:
-# - Streaming output (yield every paragraph/div/header)
-# - Embed into 'c' tool (for rendering raw HTML blocks)
-#
-######################################################################################
-
-class String
-
-  def tighten
-    gsub(/\s+/, ' ').strip
-  end
-
-  def blank?; !!self[/[^\s]/]; end
-
-end
-
-class NilClass
-  def blank?; true; end
-end
-
-######################################################################################
 
 module HTMLRenderer
+
+  module Refinements
+    refine String do
+      def tighten
+        gsub(/\s+/, ' ').strip
+      end
+
+      def blank?; !!self[/[^\s]/]; end
+    end
+
+    refine NilClass do
+      def blank?; true; end
+    end
+  end
+
+  using Refinements
+
 
   class State
     attr_accessor :list_order

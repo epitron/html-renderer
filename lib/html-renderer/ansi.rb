@@ -1,14 +1,20 @@
-# require 'html-renderer'
+require 'html-renderer'
 require 'ansi/mixin'
 require 'terminal-table'
-require 'coderay'
+
+###########################################################################
+
+module ANSI::Mixin
+  def grey; ANSI::Code.bold { ANSI::Code.black { to_s } }; end
+end
 
 module HTMLRenderer::ANSIStrings
   refine String do
     include ANSI::Mixin
-    def grey; self.black.bold; end
   end
 end
+
+###########################################################################
 
 class HTMLRenderer::ANSI < HTMLRenderer::Base
 
@@ -80,13 +86,7 @@ public
   end
 
   def block_code(code, language)
-    language ||= :ruby
-
-    language = language[1..-1] if language[0] == "."  # strip leading "."
-    language = :cpp if language == "C++"
-
-    require 'coderay'
-    "#{indent CodeRay.scan(code, language).term, 4}\n"
+    code.bold.cyan + "\n"
   end
 
   def block_quote(text)
@@ -176,6 +176,7 @@ public
 
 end
 
+###########################################################################
 
 if __FILE__ == $0
   puts HTMLRenderer::ANSI.render(open(ARGV.first || "test.html"))

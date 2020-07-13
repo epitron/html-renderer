@@ -7,7 +7,7 @@ task :build do
   system "mkdir pkg/" unless File.directory? "pkg"
   system "mv #{gemfile} pkg/"
 end
- 
+
 task :release => :build do
   system "gem push pkg/#{gemfile}"
 end
@@ -16,4 +16,10 @@ task :gem => :build
 
 task :install => :build do
   system "gem install pkg/#{gemfile}"
+end
+
+task :test do
+  Dir.chdir "test"
+  $: << "../lib"
+  load "test.rb"
 end

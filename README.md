@@ -2,11 +2,29 @@
 
 ## Overview
 
-Allows you to subclass `HTMLRenderer::Base`, add some methods, and then parse HTML to generate custom output.
+An extensible HTML renderer.
 
-(Uses a similar API to the [RedCarpet](https://github.com/vmg/redcarpet) gem.)
+Comes with two built-in renderers:
+* `HTMLRenderer::ANSI` (outputs colored text to the termnial)
+* `HTMLRenderer::Text` (outputs plain text)
 
-## Examples
+## Usage
 
-* [HTML to Plain Text Renderer](https://github.com/epitron/html-renderer/blob/master/examples/plain_text_renderer.rb)
-* [HTML to ANSI Renderer](https://github.com/epitron/html-renderer/blob/master/examples/ansi_renderer.rb)
+Render to ANSI:
+```
+ansi_text = HTMLRenderer::ANSI.render("<b>hello html</b>")
+ansi_text = HTMLRenderer::ANSI.render(open("file.html"))
+```
+
+Render to plain text:
+```
+plain_text = HTMLRenderer::Text.render(open("file.html"))
+```
+
+## Extending it
+
+The API design uses the same philosophy as [RedCarpet](https://github.com/vmg/redcarpet).
+
+To create a new renderer, subclass `HTMLRenderer::Base`, then add a method to handle each type of element. Whatever the method returns is output by the renderer.
+
+Example renderer: [HTMLRenderer::ANSI](https://github.com/epitron/html-renderer/blob/master/lib/html-renderer/ansi.rb)
