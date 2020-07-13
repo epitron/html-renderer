@@ -67,7 +67,9 @@ private
             name    = node["name"]
             content = render_children(node, state)
 
-            if name and not url
+            if title.blank? and url.blank? and name.blank?
+              content
+            elsif name and not url
               anchor(name, title, content)
             else
               link(url, title, content)
