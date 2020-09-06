@@ -4,7 +4,7 @@ require 'oga'
 
 module HTMLRenderer
 
-  module Refinements
+  module STDLIBRefinements
     refine String do
       def tighten
         gsub(/\s+/, ' ').strip
@@ -18,7 +18,7 @@ module HTMLRenderer
     end
   end
 
-  using Refinements
+  using STDLIBRefinements
 
 
   class State
@@ -154,8 +154,9 @@ private
             render_children(node, state)
 
           when "head", "script", "link", "style"
-            # skip it
-
+            #
+            # don't render anything
+            #
           else
             # raise "Unrecognized HTML tag: #{node.name} -> #{node.inspect}"
             $stderr.puts "Unrecognized HTML tag: #{node.name} -> #{node.inspect}"

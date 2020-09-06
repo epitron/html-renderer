@@ -40,6 +40,9 @@ private
     s&.downcase&.scan(/\w+/)&.join
   end
 
+  def subscript(s)
+    "[#{s}]"
+  end
 
 public
 
