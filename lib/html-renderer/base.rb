@@ -159,12 +159,14 @@ private
             #
           else
             # raise "Unrecognized HTML tag: #{node.name} -> #{node.inspect}"
-            $stderr.puts "Unrecognized HTML tag: #{node.name} -> #{node.inspect}"
+            $stderr.puts "Unrecognized HTML tag: #{node.name} -> #{node.inspect}" if $VERBOSE
             render_children(node, state)
           end
 
-        when Oga::XML::Comment, Oga::XML::Cdata
-
+        when Oga::XML::Comment, Oga::XML::Cdata, Oga::XML::ProcessingInstruction
+          #
+          # i'm not sure why you'd care about these, but here's a place to, if you do
+          #
         else
           raise "Unhandled Oga node type: #{node.class}"
         end
